@@ -14,23 +14,3 @@ const deDup = arr => {
 
 
 // a -> b -> c => c -> b -> a
-
-head = a, b, c, null
-previous = null, a, b
-temp = a, b, c
-
-
-public Node reverse(LinkedList list) {
-  Node head = list.head;
-  if (head == null) {
-    return null;
-  }
-  Node previous = null;
-  while (head != null) {
-    Node temp = head;
-    head.next = previous;
-    head = head.next;
-    previous = temp;
-  }
-  return previous;
-} 
