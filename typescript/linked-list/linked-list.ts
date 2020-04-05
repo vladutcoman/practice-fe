@@ -19,10 +19,36 @@ export class LinkedList {
   }
 
   add(element: number) {
+    const newEl = new Node(element);
+    if (this.head === null) {
+      this.head = newEl;
+      this.size++;
+      return;
+    }
+    let current = this.head;
+    while (current.next !== null) {
+      current = current.next;
+    }
+    current.next = newEl;
+    this.size++;
+  }
+
+  insertFirst(element: number) {
+    const newEl = new Node(element);
+    if (this.head === null) {
+      this.head = newEl;
+      this.size++;
+      return;
+    }
+    newEl.next = this.head;
+    this.head = newEl;
+    this.size++;
+  }
+
+  insertAt(element: number, pozition: number) {
 
   }
 
-  // insertAt(element, location) 
   // removeFrom(location) 
   // removeElement(element) 
 
@@ -30,12 +56,16 @@ export class LinkedList {
   printList() {
     if (this.head === null) {
       console.log('List is empty.');
+      return;
     }
-    let current = this.head;
+    let result = '';
+    let current: Node | null = this.head;
     while (current !== null) {
-      console.log(current.element);
+      result = `${result} ${current.element}, `;
       current = current.next;
     }
+    console.log(result);
+    
   }
 
   isEmpty() {
