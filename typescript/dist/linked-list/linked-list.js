@@ -46,7 +46,7 @@ class LinkedList {
             return;
         }
         const newEl = new Node(element);
-        let index = 1;
+        let index = 0;
         let previous = this.head;
         let current = this.head;
         while (index !== pozition) {
@@ -57,8 +57,54 @@ class LinkedList {
         previous.next = newEl;
         newEl.next = current;
     }
-    // removeFrom(location) 
-    // removeElement(element) 
+    removeFrom(pozition) {
+        if (this.head === null) {
+            console.log('List is empty');
+            return;
+        }
+        if (pozition < 0 || pozition >= this.size) {
+            console.log('Out of bound');
+            return;
+        }
+        if (pozition === 0) {
+            this.head = this.head.next;
+        }
+        let index = 0;
+        let current = this.head;
+        let previous = null;
+        while (index < pozition) {
+            previous = current;
+            current = current.next;
+            index++;
+        }
+        previous.next = current.next;
+    }
+    removeElement(element) {
+        if (this.head === null) {
+            console.log('Empty list');
+            return;
+        }
+        if (this.head.element === element) {
+            this.head = this.head.next;
+            return;
+        }
+        let current = this.head;
+        let previous = null;
+        let found = false;
+        while (current !== null) {
+            if (current.element === element) {
+                found = true;
+                break;
+            }
+            previous = current;
+            current = current.next;
+        }
+        if (!found) {
+            console.log('Element not found');
+            return;
+        }
+        previous.next = current.next;
+    }
     /** Helper Methods */
     printList() {
         if (this.head === null) {
