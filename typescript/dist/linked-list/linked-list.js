@@ -29,20 +29,33 @@ class LinkedList {
     insertFirst(element) {
         const newEl = new Node(element);
         if (this.head === null) {
-            this.head = newEl;
-            this.size++;
-            return;
+            newEl.next = this.head;
         }
-        newEl.next = this.head;
+        const prevHead = this.head;
         this.head = newEl;
+        newEl.next = prevHead;
         this.size++;
     }
-    insertAt(element, index) {
-        if (index > this.size || index < 0) {
-            console.log('The position is out of bound');
+    insertAt(element, pozition) {
+        if (pozition < 0 || pozition > this.size) {
+            console.log('Out of bound');
             return;
         }
-        // handle insert first
+        if (this.head === null || pozition === 0) {
+            this.insertFirst(element);
+            return;
+        }
+        const newEl = new Node(element);
+        let index = 1;
+        let previous = this.head;
+        let current = this.head;
+        while (index !== pozition) {
+            previous = current;
+            current = current.next;
+            index++;
+        }
+        previous.next = newEl;
+        newEl.next = current;
     }
     // removeFrom(location) 
     // removeElement(element) 

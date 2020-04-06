@@ -36,17 +36,34 @@ export class LinkedList {
   insertFirst(element: number) {
     const newEl = new Node(element);
     if (this.head === null) {
-      this.head = newEl;
-      this.size++;
-      return;
+      newEl.next = this.head;
     }
-    newEl.next = this.head;
+    const prevHead = this.head;
     this.head = newEl;
+    newEl.next = prevHead;
     this.size++;
   }
 
   insertAt(element: number, pozition: number) {
-
+    if (pozition < 0 || pozition > this.size) {
+      console.log('Out of bound');
+      return;
+    }
+    if (this.head === null || pozition === 0) {
+      this.insertFirst(element);
+      return;
+    }
+    const newEl = new Node(element);
+    let index = 1;
+    let previous: Node | null = this.head;
+    let current: Node | null = this.head;
+    while (index !== pozition) {
+      previous = current;
+      current = current!.next;
+      index++;
+    }
+    previous!.next = newEl;
+    newEl.next = current;
   }
 
   // removeFrom(location) 
