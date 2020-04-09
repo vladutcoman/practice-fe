@@ -68,6 +68,7 @@ class LinkedList {
         }
         if (pozition === 0) {
             this.head = this.head.next;
+            this.size--;
         }
         let index = 0;
         let current = this.head;
@@ -78,6 +79,7 @@ class LinkedList {
             index++;
         }
         previous.next = current.next;
+        this.size--;
     }
     removeElement(element) {
         if (this.head === null) {
@@ -86,6 +88,7 @@ class LinkedList {
         }
         if (this.head.element === element) {
             this.head = this.head.next;
+            this.size--;
             return;
         }
         let current = this.head;
@@ -104,6 +107,7 @@ class LinkedList {
             return;
         }
         previous.next = current.next;
+        this.size--;
     }
     /** Helper Methods */
     printList() {
@@ -124,6 +128,23 @@ class LinkedList {
     }
     getSize() {
         return this.size;
+    }
+    // 2 -> 3 -> 4 -> null
+    // null <- 2 <- 3 <-4
+    reverseList() {
+        if (this.head === null) {
+            console.log('Empty list');
+            return;
+        }
+        let previous = null;
+        let current = this.head;
+        while (current !== null) {
+            const changer = current.next;
+            current.next = previous;
+            previous = current;
+            current = changer;
+        }
+        this.head = previous;
     }
 }
 exports.LinkedList = LinkedList;
