@@ -24,3 +24,19 @@ console.log(fn.prototype);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
